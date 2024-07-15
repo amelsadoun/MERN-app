@@ -1,18 +1,18 @@
 import * as api from "../api";
 
 //action creators
-export const getPosts = () => async (dispatch) => {
+export const getEvents = () => async (dispatch) => {
   try {
-    const {data} = await api.fetchPosts();
+    const {data} = await api.fetchEvents();
     dispatch({ type: 'FETCH_ALL', payload: data });
   } catch (e) {
     console.log(e.message);
   }
 };
 
-export const createPost = (post) => async (dispatch) => {
+export const createEvent = (event) => async (dispatch) => {
   try {
-    const {data} = await api.createPost(post);
+    const {data} = await api.createEvent(event);
     dispatch({ type: 'CREATE', payload: data });
   } catch (e) {
     console.log(e.message);

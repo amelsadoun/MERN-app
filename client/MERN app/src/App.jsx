@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { getPosts } from "./actions/posts";
+import { getEvents } from "./actions/events";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
-import Posts from "./components/posts/posts";
+import Posts from "./components/posts/events";
 import Form from "./components/form/form";
 import Header from "./components/header/header";
 
@@ -10,7 +10,7 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getPosts());
+    dispatch(getEvents());
   }, [dispatch]);
 
   return (

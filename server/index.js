@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 import "dotenv/config";
 
-import postsRouter from "./routes/posts.js";
+import eventsRouter from "./routes/events.js";
 
 const app = express();
 
@@ -29,7 +29,7 @@ mongoose
   .catch((err) => console.log(err.message));
 
 //Routes
-app.use("/api/posts", postsRouter);
+app.use("/api/events", eventsRouter);
 
 //error handler (must be under routes)
 // app.use(notFound);
