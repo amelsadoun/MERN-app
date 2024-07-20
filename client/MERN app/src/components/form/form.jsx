@@ -8,12 +8,21 @@ const Form = () => {
   const dispatch = useDispatch();
   const [isOneDayEvent, setIsOneDayEvent] = useState(false);
 
+  const validate = (values) => {
+    const errors = {};
+    if (!values.startDate) {
+      errors.startDate = 'This field is required';
+    }
+    // Add other validations if needed
+    return errors;
+  };
+
   const formik = useFormik({
     initialValues: {
       name: "",
       club: "",
       description: "",
-      date: "",
+      startDate: "",
       endDate: "",
       location: "",
       registrationLink: "",
@@ -22,13 +31,13 @@ const Form = () => {
       eventType: "",
       selectedFile: "",
     },
+    validate,
     onSubmit: (values) => {
       const { socialLinks, ...rest } = values;
       dispatch(
         createEvent({
           ...rest,
           socialLinks: socialLinks.split(",").map((link) => link.trim()),
-          location: marker ? `${marker.lat},${marker.lng}` : "",
         })
       );
     },
@@ -68,11 +77,12 @@ const Form = () => {
       <input
         className="h-10 p-2 rounded-md border-[1px] border-slate-300"
         type="datetime-local"
-        name="date"
+        name="startDate"
         placeholder="Event Date"
-        value={formik.values.date}
+        value={formik.values.startDate}
         onChange={formik.handleChange}
       />
+      {formik.errors.startDate ? <div className="text-red-600 text-left">{formik.errors.startDate}</div> : null}
 
       <div className="flex items-center">
         <input
