@@ -4,6 +4,7 @@ import cors from "cors";
 import "dotenv/config";
 
 import eventsRouter from "./routes/events.js";
+import authRouter from "./routes/auth.js"
 
 const app = express();
 
@@ -30,6 +31,7 @@ mongoose
 
 //Routes
 app.use("/api/events", eventsRouter);
+app.use("/api/auth",authRouter); 
 
 //error handler (must be under routes)
 // app.use(notFound);
