@@ -7,8 +7,11 @@ import { thunk } from "redux-thunk";
 import reducers from "./reducers";
 import { Provider } from "react-redux";
 
+const initialState = {};
+
 const store = configureStore(
   { reducer: reducers },
+  initialState,
   compose(applyMiddleware(thunk))
 );
 
