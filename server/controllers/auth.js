@@ -6,10 +6,11 @@ import Club from "../models/club.js";
 
 const jwtSecret = process.env.JWT_SECRET;
 console.log(jwtSecret);
+
 // @desc middleware for club sign up/registration
 // @route /signup
 export const signUpClub = async (req, res, next) => {
-  const { name, email, password, confirmedPassword, description, imageURL } =
+  const { name, email, password, description, imageURL } =
     req.body;
   // console.log(req.body);
   try {
@@ -17,13 +18,6 @@ export const signUpClub = async (req, res, next) => {
     const existingClub = await Club.findOne({ $or: [{ email }, { name }] });
     if (existingClub) {
       return res.status(400).json({ message: "Club already exists" });
-    }
-
-    // Check if the password and its confirmation match
-    if (password !== confirmedPassword) {
-      return res
-        .status(403)
-        .json({ message: "Password confirmation is incorrect" });
     }
 
     // Hash password
@@ -66,13 +60,13 @@ export const loginClub = async (req, res) => {
     const club = await Club.findOne({ email });
     //check if club exists
     if (!club) {
-      return res.status(400).json("No club exists with this email address");
+      return res.status(400).json({ message: "No club exists with this email address" });
     }
 
     //check if password is correct
     const isMatch = await bcrypt.compare(password, club.password);
     if (!isMatch) {
-      return res.status(400).json("The password is incorrect");
+      return res.status(400).json({ message: "The password is incorrect" });
     }
     // Create JWT token
     const token = jwt.sign({ id: club._id }, jwtSecret, {

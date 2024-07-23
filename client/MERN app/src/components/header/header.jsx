@@ -7,8 +7,9 @@ export default function Header() {
         (E)VENTECH
       </h1>{" "}
       <div className="self-center flex flex-row gap-5">
-        <Button buttonText={"Sign up"} link="/signup" />
+        <Button buttonText={"Events"} link="/" />
         <Button buttonText={"Log in"} link="/login" />
+        <Button buttonText={"+ event"} link="/form" />
       </div>
     </div>
   );

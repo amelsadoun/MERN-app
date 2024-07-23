@@ -19,10 +19,6 @@ function App() {
     <Router>
       <div className="bg-slate-50 flex gap-10 flex-col min-h-[100vh]">
         <Header />
-        <nav className="flex gap-4">
-          <Link to="/">Posts</Link>
-          <Link to="/form">Add post</Link>
-        </nav>
         <Routes>
           <Route path="/" element={<Posts />} />
           <Route path="/form" element={<Form />} />

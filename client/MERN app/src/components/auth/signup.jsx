@@ -3,6 +3,8 @@ import FileBase from "react-file-base64";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { signup } from "../../api";
+import { useState } from "react";
+import { Loader } from "./Loader";
 
 export default function SignUp() {
   // some shared styles between components
@@ -13,6 +15,40 @@ export default function SignUp() {
 
   const dispatch = useDispatch();
 
+  //loader mor submission
+  const [loading, setLoading] = useState(false);
+
+  //form validation - front error handling
+  const validate = (values) => {
+    const errors = {};
+    if (!values.email) {
+      //field is empty
+      errors.email = "Email is required";
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
+      //not in email format
+      errors.email = "Invalid email address";
+    }
+
+    if (!values.password) {
+      //password field is empty
+      errors.password = "Password is required";
+    } else if (values.password.length < 8) {
+      errors.password = "Password must be at least 8 characters";
+    }
+
+    if (!values.confirmedPassword) {
+      errors.confirmedPassword = "Please confirm your password";
+    } else if (values.confirmedPassword !== values.password) {
+      errors.confirmedPassword = "The  password confirmation is incorrect";
+    }
+
+    if (!values.name) {
+      errors.name = "Club name is required";
+    }
+
+    return errors;
+  };
+
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -22,108 +58,89 @@ export default function SignUp() {
       description: "",
       imageURL: "",
     },
-    // validate,
+    validate,
     onSubmit: (data) => {
       // console.log(data)
-      dispatch(signup(data));
+      setLoading(true); //set loader
+      const errorMessage = dispatch(signup(data));
+      setLoading(false);
+      if (errorMessage == "Club already exists") {
+        formik.setErrors({ email: errorMessage });
+      }
     },
   });
 
+  //because there were 4 inputs, it's local in the function unlike the others because formik hh
+  const renderInputField = (name, type, placeholder, formik) => (
+    <div className={divSharedStyle}>
+      <label htmlFor={name} className={labelSharedStyle}>
+        {name.charAt(0).toUpperCase() + name.slice(1)}
+      </label>
+      <input
+        type={type}
+        name={name}
+        placeholder={placeholder}
+        className={inputSharedStyle}
+        value={formik.values[name]}
+        onBlur={formik.handleBlur}
+        onChange={formik.handleChange}
+      />
+      {formik.touched[name] && formik.errors[name] ? (
+        <div className="text-red-600 text-sm">{formik.errors[name]}</div>
+      ) : null}
+    </div>
+  );
+
   return (
-    <form className="bg-gradient-to-bl from-green-100 to-slate-200 mb-10 shadow w-[70vw] self-center p-10 flex border-[1px] border-green-200 flex-col gap-5 rounded-3xl desktop:w-[40vw]">
-      <p className="text-green-900 text-left self-center font-bold text-2xl desktop:text-3xl ">
-        Create an (E)venTech account
-      </p>
-      <p className="text-green-900 text-left self-center font-medium text-lg mb-3">
-        Your chance to share your upcoming events with the community!
-      </p>
-      <div className={divSharedStyle}>
-        <label htmlFor="" className={labelSharedStyle}>
-          Club name
-        </label>
-        <input
-          type="text"
-          name="name"
-          placeholder="club name..."
-          className={inputSharedStyle}
-          value={formik.values.name}
-          onChange={formik.handleChange}
-        />
-      </div>
-      <div className={divSharedStyle}>
-        <label htmlFor="" className={labelSharedStyle}>
-          Club email address
-        </label>
-        <input
-          type="email"
-          name="email"
-          placeholder="example: clubname@example.com"
-          className={inputSharedStyle}
-          value={formik.values.email}
-          onChange={formik.handleChange}
-        />
-      </div>
-      <div className={divSharedStyle}>
-        <label htmlFor="" className={labelSharedStyle}>
-          Password
-        </label>
-        <input
-          type="password"
-          name="password"
-          placeholder="password"
-          className={inputSharedStyle}
-          value={formik.values.password}
-          onChange={formik.handleChange}
-        />
-      </div>
-      <div className={divSharedStyle}>
-        <label htmlFor="" className={labelSharedStyle}>
-          Confirm password
-        </label>
-        <input
-          type="password"
-          name="confirmedPassword"
-          placeholder="confirm password"
-          className={inputSharedStyle}
-          value={formik.values.confirmedPassword}
-          onChange={formik.handleChange}
-        />
-      </div>
-      <div className={divSharedStyle}>
-        <label htmlFor="" className={labelSharedStyle}>
-          Club description
-        </label>
-        <textarea
-          name="description"
-          type="text"
-          placeholder="provide a short description of your club..."
-          className={"min-h-20" + inputSharedStyle}
-          value={formik.values.description}
-          onChange={formik.handleChange}
-        />
-      </div>
-      <div className={divSharedStyle}>
-        <label htmlFor="" className={labelSharedStyle}>
-          Profile image
-        </label>
-        <FileBase
-          type="file"
-          multiple={false}
-          onDone={({ base64 }) => formik.setFieldValue("imageURL", base64)}
-        />
-      </div>
-      <Button label={"Create account"} onClick={formik.handleSubmit} />
-      <p className="self-center text-sm">
-        already have an account?{" "}
-        <Link to="/login" className="text-green-700 underline">
-          Log in
-        </Link>
-      </p>
-    </form>
+    <div className=" bg-gradient-to-bl from-green-100 to-slate-200 mb-10 drop-shadow-xl w-[70vw] self-center p-10 flex border-[1px] border-slate-300 flex-col gap-5 rounded-3xl desktop:w-[40vw]">
+      <Titles />
+      {loading && <Loader />}
+      <form className="flex flex-col gap-5 z-0" onSubmit={formik.handleSubmit}>
+        {renderInputField("name", "text", "club name...", formik)}
+        {renderInputField(
+          "email",
+          "email",
+          "example: clubname@example.com",
+          formik
+        )}
+        {renderInputField("password", "password", "password", formik)}
+        {renderInputField(
+          "confirmedPassword",
+          "password",
+          "confirm password",
+          formik
+        )}
+        <div className={divSharedStyle}>
+          <label htmlFor="description" className={labelSharedStyle}>
+            Club description
+          </label>
+          <textarea
+            name="description"
+            type="text"
+            placeholder="provide a short description of your club..."
+            className={"min-h-20 " + inputSharedStyle}
+            value={formik.values.description}
+            onChange={formik.handleChange}
+          />
+        </div>
+        <div className={divSharedStyle}>
+          <label htmlFor="imageURL" className={labelSharedStyle}>
+            Profile image
+          </label>
+          <FileBase
+            type="file"
+            multiple={false}
+            onDone={({ base64 }) => formik.setFieldValue("imageURL", base64)}
+          />
+        </div>
+        <Button label={"Create account"} onClick={formik.handleSubmit} />
+      </form>
+      <LoginLink />
+    </div>
   );
 }
 
-function Button({ label, onClick }) {
+const Button = ({ label, onClick }) => {
   return (
     <a
       onClick={onClick}
@@ -134,7 +151,31 @@ function Button({ label, onClick }) {
       <span className="relative w-full text-green-900 transition-colors duration-200 ease-in-out group-hover:text-white">
         {label}
       </span>
-      <span class="absolute inset-0 border-[1px] border-green-900 rounded-full"></span>
+      <span className="absolute inset-0 border-[1px] border-green-900 rounded-full"></span>
     </a>
   );
-}
+};
+
+const Titles = () => {
+  return (
+    <>
+      <p className="text-green-900 text-left self-center font-bold text-2xl desktop:text-3xl ">
+        Create an (E)venTech account
+      </p>
+      <p className="text-green-900 text-left self-center font-medium text-lg mb-3">
+        Your chance to share your upcoming events with the community!
+      </p>
+    </>
+  );
+};
+
+const LoginLink = () => {
+  return (
+    <p className="self-center text-sm">
+      already have an account?{" "}
+      <Link to="/login" className="text-green-700 underline">
+        Log in
+      </Link>
+    </p>
+  );
+};
