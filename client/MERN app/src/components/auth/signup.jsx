@@ -2,9 +2,9 @@ import { useFormik } from "formik";
 import FileBase from "react-file-base64";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { signup } from "../../api";
 import { useState } from "react";
 import { Loader } from "./Loader";
+import { signup } from "../../actions/auth";
 
 export default function SignUp() {
   // some shared styles between components
@@ -59,10 +59,10 @@ export default function SignUp() {
       imageURL: "",
     },
     validate,
-    onSubmit: (data) => {
+    onSubmit: async (data) => {
       // console.log(data)
       setLoading(true); //set loader
-      const errorMessage = dispatch(signup(data));
+      const errorMessage = await dispatch(signup(data)); //it says that await is useless but it doesn't work without it
       setLoading(false);
       if (errorMessage == "Club already exists") {
         formik.setErrors({ email: errorMessage });
@@ -77,6 +77,7 @@ export default function SignUp() {
         {name.charAt(0).toUpperCase() + name.slice(1)}
       </label>
       <input
+        disabled={loading}
         type={type}
         name={name}
         placeholder={placeholder}
@@ -115,6 +116,7 @@ export default function SignUp() {
             Club description
           </label>
           <textarea
+            disabled={loading}
             name="description"
             type="text"
             placeholder="provide a short description of your club..."
