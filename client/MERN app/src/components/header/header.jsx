@@ -1,6 +1,10 @@
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 export default function Header() {
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const clubName = useSelector((state) => state.auth.club?.name);
+  console.log("authenticated: " + isAuthenticated);
   return (
     <div className="mb-10 bg-gradient-to-bl from-green-400 to-green-100 self-center h-28 w-[calc(100vw+40px)]  flex flex-row align-center justify-between px-24 rounded-b-[500px]">
       <h1 className="self-center text-4xl font-bold text-green-950">
@@ -8,8 +12,9 @@ export default function Header() {
       </h1>{" "}
       <div className="self-center flex flex-row gap-5">
         <Button buttonText={"Events"} link="/" />
-        <Button buttonText={"Log in"} link="/login" />
-        <Button buttonText={"+ event"} link="/form" />
+        {!isAuthenticated && <Button buttonText={"Log in"} link="/login" />}
+        {isAuthenticated && <Button buttonText={"+ event"} link="/createEvent" />}
+        {isAuthenticated && <span className="self-center text-green-950">{clubName}</span>}
       </div>
     </div>
   );
@@ -26,7 +31,7 @@ function Button({ buttonText, link }) {
       <span className="relative w-full text-white transition-colors duration-200 ease-in-out group-hover:text-green-900">
         {buttonText}
       </span>
-      <span class="absolute inset-0 border-[1px] border-white rounded-full"></span>
+      <span className="absolute inset-0 border-[1px] border-white rounded-full"></span>
     </Link>
   );
 }

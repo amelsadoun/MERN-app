@@ -5,6 +5,9 @@ export default (events = [], action) => {
       return action.payload;
     case 'CREATE':
       return [...events, action.payload];
+    case 'FETCH':
+      // console.log(action.payload)
+      return action.payload;
     default:
       return events;
   }

@@ -55,7 +55,11 @@ const eventSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
     default: Date.now
-  }
+  },
+  imageURL: {
+    type: String,
+    required: false
+  },
 });
 
 const Event = mongoose.model('Event', eventSchema);

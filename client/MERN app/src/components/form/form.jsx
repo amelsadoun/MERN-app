@@ -1,17 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createEvent } from "../../actions/events.js";
 import FileBase from "react-file-base64";
+import { redirect, useNavigate } from "react-router-dom";
 
 const Form = () => {
   const dispatch = useDispatch();
   const [isOneDayEvent, setIsOneDayEvent] = useState(false);
-
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const clubName = useSelector((state) => state.auth.club?.name);
+  const navigate = useNavigate();
   const validate = (values) => {
     const errors = {};
     if (!values.startDate) {
-      errors.startDate = 'This field is required';
+      errors.startDate = "This field is required";
     }
     // Add other validations if needed
     return errors;
@@ -29,7 +32,7 @@ const Form = () => {
       socialLinks: "",
       field: "",
       eventType: "",
-      selectedFile: "",
+      imageURL: "",
     },
     validate,
     onSubmit: (values) => {
@@ -38,10 +41,17 @@ const Form = () => {
         createEvent({
           ...rest,
           socialLinks: socialLinks.split(",").map((link) => link.trim()),
+          club: clubName,
         })
       );
     },
   });
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate("/login");
+    }
+  }, []);
 
   return (
     <form
@@ -56,7 +66,7 @@ const Form = () => {
         value={formik.values.name}
         onChange={formik.handleChange}
       />
-
+      {/* 
       <input
         className="h-10 p-2 rounded-md border-[1px] border-slate-300"
         type="text"
@@ -64,7 +74,7 @@ const Form = () => {
         placeholder="Club Name"
         value={formik.values.club}
         onChange={formik.handleChange}
-      />
+      /> */}
 
       <textarea
         className="p-2 min-h-40 max-h-60 rounded-md border-[1px] border-slate-300"
@@ -82,7 +92,9 @@ const Form = () => {
         value={formik.values.startDate}
         onChange={formik.handleChange}
       />
-      {formik.errors.startDate ? <div className="text-red-600 text-left">{formik.errors.startDate}</div> : null}
+      {formik.errors.startDate ? (
+        <div className="text-red-600 text-left">{formik.errors.startDate}</div>
+      ) : null}
 
       <div className="flex items-center">
         <input
@@ -164,7 +176,7 @@ const Form = () => {
       <FileBase
         type="file"
         multiple={false}
-        onDone={({ base64 }) => formik.setFieldValue("selectedFile", base64)}
+        onDone={({ base64 }) => formik.setFieldValue("imageURL", base64)}
       />
 
       <button

@@ -1,9 +1,8 @@
 import { useFormik } from "formik";
-import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, redirect } from "react-router-dom";
 import { useState } from "react";
 import { login } from "../../actions/auth";
-import { Riple } from "react-loading-indicators";
 import { Loader } from "./Loader";
 
 export default function Login() {
@@ -12,6 +11,7 @@ export default function Login() {
   const labelSharedStyle = "ml-2 text-[13px] text-green-700";
   const divSharedStyle = "flex flex-col gap-2";
 
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const dispatch = useDispatch();
 
   const [loading, setLoading] = useState(false);
@@ -53,6 +53,10 @@ export default function Login() {
       }
     },
   });
+
+  if (isAuthenticated) {
+     redirect("/");
+  }
 
   return (
     <div className="bg-gradient-to-bl drop-shadow-xl from-green-100 to-slate-200 mb-10 w-[70vw] self-center p-10 flex border-[1px] border-slate-300 flex-col gap-5 rounded-3xl desktop:w-[30vw] overflow-hidden">

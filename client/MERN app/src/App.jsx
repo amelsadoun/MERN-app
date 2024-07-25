@@ -7,6 +7,7 @@ import Form from "./components/form/form";
 import Header from "./components/header/header";
 import SignUp from "./components/auth/signup";
 import Login from "./components/auth/login";
+import EventInfo from "./components/posts/eventInfo";
 
 function App() {
   const dispatch = useDispatch();
@@ -17,13 +18,14 @@ function App() {
 
   return (
     <Router>
-      <div className="bg-slate-50 flex gap-10 flex-col min-h-[100vh]">
+      <div className="bg-slate-50 flex flex-col min-h-[100vh]">
         <Header />
         <Routes>
           <Route path="/" element={<Posts />} />
-          <Route path="/form" element={<Form />} />
+          <Route path="/createEvent" element={<Form />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/:id" element={<EventInfo />} />
         </Routes>
       </div>
     </Router>
