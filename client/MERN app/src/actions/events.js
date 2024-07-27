@@ -19,6 +19,7 @@ export const createEvent = (event) => async (dispatch) => {
   }
 };
 
+//get signle event
 export const getEvent = (id) => async (dispatch) => {
   try {
     const { data } = await api.getEvent(id);

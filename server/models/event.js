@@ -6,7 +6,7 @@ const eventSchema = new mongoose.Schema({
     required: true,
     trim: true
   },
-  club: {
+  clubId: {
     type: String,
     required: true,
     trim: true

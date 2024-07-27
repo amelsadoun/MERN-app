@@ -9,7 +9,7 @@ const Form = () => {
   const dispatch = useDispatch();
   const [isOneDayEvent, setIsOneDayEvent] = useState(false);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-  const clubName = useSelector((state) => state.auth.club?.name);
+  const clubId = useSelector((state) => state.auth.club?.id);
   const navigate = useNavigate();
   const validate = (values) => {
     const errors = {};
@@ -23,7 +23,7 @@ const Form = () => {
   const formik = useFormik({
     initialValues: {
       name: "",
-      club: "",
+      clubId: "",
       description: "",
       startDate: "",
       endDate: "",
@@ -41,7 +41,7 @@ const Form = () => {
         createEvent({
           ...rest,
           socialLinks: socialLinks.split(",").map((link) => link.trim()),
-          club: clubName,
+          clubId: clubId,
         })
       );
     },

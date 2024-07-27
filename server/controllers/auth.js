@@ -10,8 +10,7 @@ console.log(jwtSecret);
 // @desc middleware for club sign up/registration
 // @route /signup
 export const signUpClub = async (req, res, next) => {
-  const { name, email, password, description, imageURL } =
-    req.body;
+  const { name, email, password, description, imageURL } = req.body;
   // console.log(req.body);
   try {
     // Check if club already exists
@@ -60,7 +59,9 @@ export const loginClub = async (req, res) => {
     const club = await Club.findOne({ email });
     //check if club exists
     if (!club) {
-      return res.status(400).json({ message: "No club exists with this email address" });
+      return res
+        .status(400)
+        .json({ message: "No club exists with this email address" });
     }
 
     //check if password is correct
@@ -79,5 +80,17 @@ export const loginClub = async (req, res) => {
     });
   } catch (err) {
     res.status(500).json({ message: err.message });
+  }
+};
+
+// @desc get club info
+// @route /auth/:id
+export const getClub = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const club = await Club.findOne({ _id: id });
+    res.status(200).json(club);
+  } catch (err) {
+    res.status(404).json({ message: err.message });
   }
 };

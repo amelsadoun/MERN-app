@@ -29,7 +29,19 @@ export default function (state = initialState, action) {
         loading: false,
         club: null,
       };
+    case "GET_CLUB":
+      return {
+        ...state,
+        club: payload,
+        loading: false,
+      };
     default:
       return state;
   }
 }
+
+
+
+
+
+

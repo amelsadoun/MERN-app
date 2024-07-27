@@ -21,3 +21,15 @@ export const login = (formData) => async (dispatch) => {
     return err.response.data.message;
   }
 };
+
+export const getClub = (id) => async (dispatch) => {
+  try {
+    const { data } = await api.getClub(id);
+    // console.log(data)
+    dispatch({ type: "GET_CLUB", payload: data });
+  } catch (err) {
+    console.error(err.message);
+  }
+};
+
+

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, redirect } from "react-router-dom";
 import { useState } from "react";
 import { login } from "../../actions/auth";
-import { Loader } from "./Loader";
+import { Loader } from "../Loader";
 
 export default function Login() {
   const inputSharedStyle =
