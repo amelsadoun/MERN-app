@@ -14,7 +14,7 @@ export default function EventInfo() {
   useEffect(() => {
     const fetchEvent = async () => {
       setLoading(true);
-      await dispatch(getEvent(id));
+      await dispatch(getEvent(id)); //it says await has no effect but it's LYING
       setLoading(false);
     };
 

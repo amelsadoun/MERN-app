@@ -1,17 +1,25 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import EventCard from "./eventCard";
 import { useState, useEffect } from "react";
 import { Loader } from "../Loader";
+import { getEvents } from "../../actions/events";
 
 export default function Events() {
   const [loading, setLoading] = useState(true);
-  const events = useSelector((state) => state.events);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    if (events.length > 0) {
+    const fetchEvents = async () => {
+      setLoading(true);
+      await dispatch(getEvents());
       setLoading(false);
-    }
-  }, [events]);
+    };
+
+    fetchEvents();
+  }, [dispatch]);
+
+  const events = useSelector((state) => state.events);
 
   if (loading) {
     return <Loader />;

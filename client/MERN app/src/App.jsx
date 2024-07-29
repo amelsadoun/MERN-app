@@ -1,6 +1,3 @@
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { getEvents } from "./actions/events";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import Posts from "./components/posts/events";
 import Form from "./components/form/form";
@@ -10,12 +7,7 @@ import Login from "./components/auth/login";
 import EventInfo from "./components/posts/eventInfo";
 
 function App() {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getEvents());
-  }, [dispatch]);
-
+ 
   return (
     <Router>
       <div className="bg-slate-50 flex flex-col min-h-[100vh]">

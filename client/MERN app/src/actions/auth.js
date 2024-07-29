@@ -32,4 +32,7 @@ export const getClub = (id) => async (dispatch) => {
   }
 };
 
-
+export const logout = () => (dispatch) => {
+  localStorage.removeItem("club");
+  dispatch({ type: "LOGOUT" });
+};

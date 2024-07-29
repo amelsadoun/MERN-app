@@ -1,8 +1,6 @@
 const initialState = {
-  token: localStorage.getItem("token"),
-  isAuthenticated: false,
-  loading: true,
-  club: null,
+  club: JSON.parse(localStorage.getItem('club')) || null, // is this smart?
+  isAuthenticated: !!localStorage.getItem('club'), // Set based on presence of club data, apparently !! booleans everything 
 };
 
 export default function (state = initialState, action) {
@@ -11,37 +9,27 @@ export default function (state = initialState, action) {
   switch (type) {
     case "SIGNUP_SUCCESS":
     case "LOGIN_SUCCESS":
-      localStorage.setItem("token", payload.token);
+      localStorage.setItem('club', JSON.stringify(payload.club)); // Save club info
       return {
         ...state,
-        token: payload.token,
-        isAuthenticated: true,
-        loading: false,
         club: payload.club,
+        isAuthenticated: true,
       };
     case "SIGNUP_FAIL":
     case "LOGIN_FAIL":
-      localStorage.removeItem("token");
+    case "LOGOUT":
+      localStorage.removeItem('club'); // Remove club info
       return {
         ...state,
-        token: null,
-        isAuthenticated: false,
-        loading: false,
         club: null,
+        isAuthenticated: false,
       };
     case "GET_CLUB":
       return {
         ...state,
         club: payload,
-        loading: false,
       };
     default:
       return state;
   }
 }
-
-
-
-
-
-

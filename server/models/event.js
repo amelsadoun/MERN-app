@@ -7,7 +7,7 @@ const eventSchema = new mongoose.Schema({
     trim: true
   },
   clubId: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
     required: true,
     trim: true
   },

@@ -1,10 +1,24 @@
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { login } from "../../actions/auth";
+import logout from "../../assets/logout.svg";
 export default function Header() {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+
   const clubName = useSelector((state) => state.auth.club?.name);
-  console.log("authenticated: " + isAuthenticated);
+
+  const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    dispatch(login());
+    navigate("/");
+  };
+  // console.log(clubName);
+
+  // console.log("authenticated: " + isAuthenticated);
+
   return (
     <div className="mb-10 bg-gradient-to-bl from-green-400 to-green-100 self-center h-28 w-[calc(100vw+40px)]  flex flex-row align-center justify-between px-24 rounded-b-[500px]">
       <h1 className="self-center text-4xl font-bold text-green-950">
@@ -13,8 +27,20 @@ export default function Header() {
       <div className="self-center flex flex-row gap-5">
         <Button buttonText={"Events"} link="/" />
         {!isAuthenticated && <Button buttonText={"Log in"} link="/login" />}
-        {isAuthenticated && <Button buttonText={"+ event"} link="/createEvent" />}
-        {isAuthenticated && <span className="self-center text-green-950">{clubName}</span>}
+        {isAuthenticated && (
+          <Button buttonText={"+ event"} link="/createEvent" />
+        )}
+        {isAuthenticated && (
+          <span className="self-center text-green-950">{clubName}</span>
+        )}
+        {isAuthenticated && (
+          <img
+            src={logout}
+            className="self-center w-6 cursor-pointer"
+            onClick={handleLogout}
+            alt="logout"
+          />
+        )}
       </div>
     </div>
   );

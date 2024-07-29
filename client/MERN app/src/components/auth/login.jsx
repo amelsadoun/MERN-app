@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, redirect } from "react-router-dom";
-import { useState } from "react";
+import { Link, redirect, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { login } from "../../actions/auth";
 import { Loader } from "../Loader";
 
@@ -13,6 +13,7 @@ export default function Login() {
 
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
 
@@ -54,9 +55,11 @@ export default function Login() {
     },
   });
 
-  if (isAuthenticated) {
-     redirect("/");
-  }
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/");
+    }
+  });
 
   return (
     <div className="bg-gradient-to-bl drop-shadow-xl from-green-100 to-slate-200 mb-10 w-[70vw] self-center p-10 flex border-[1px] border-slate-300 flex-col gap-5 rounded-3xl desktop:w-[30vw] overflow-hidden">

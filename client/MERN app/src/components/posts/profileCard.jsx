@@ -16,7 +16,7 @@ export default function ProfileCard({ clubId }) {
   console.log(club);
 
   return (
-    <div className="flex flex-col gap-3 align-middle text-center bg-slate-100 self-top h-min desktop:flex-[20%] desktop:mx-10 mx-5 -mt-10 p-5 justify-around rounded-lg shadow-md">
+    <div className="flex flex-col gap-3 w-44 align-middle text-center bg-slate-100 self-top h-min desktop:flex-[20%] desktop:mx-10 mx-5 -mt-10 p-5 justify-around rounded-lg shadow-md">
       {loading ? (
         <>loading...</>
       ) : (
@@ -27,8 +27,8 @@ export default function ProfileCard({ clubId }) {
             alt="profile"
           />
           <h1 className="text-xl font-semibold">{club?.name}</h1>
-          <h1 className="text-lg font-medium">{club?.email}</h1>
-          <h1 className="text-base">{club?.description}</h1>
+          {/* <h1 className="text-lg font-medium">{club?.email}</h1> */}
+          <h1 className="text-sm">{club?.description}</h1>
         </>
       )}
     </div>

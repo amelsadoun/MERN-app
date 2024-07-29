@@ -16,7 +16,6 @@ const Form = () => {
     if (!values.startDate) {
       errors.startDate = "This field is required";
     }
-    // Add other validations if needed
     return errors;
   };
 
