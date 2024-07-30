@@ -83,14 +83,3 @@ export const loginClub = async (req, res) => {
   }
 };
 
-// @desc get club info
-// @route /auth/:id
-export const getClub = async (req, res) => {
-  const id = req.params.id;
-  try {
-    const club = await Club.findOne({ _id: id });
-    res.status(200).json(club);
-  } catch (err) {
-    res.status(404).json({ message: err.message });
-  }
-};

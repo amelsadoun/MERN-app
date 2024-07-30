@@ -1,5 +1,5 @@
 const initialState = {
-  club: JSON.parse(localStorage.getItem('club')) || null, // is this smart?
+  club: JSON.parse(localStorage.getItem('club')) || null, // is this dumb?
   isAuthenticated: !!localStorage.getItem('club'), // Set based on presence of club data, apparently !! booleans everything 
 };
 
@@ -23,11 +23,6 @@ export default function (state = initialState, action) {
         ...state,
         club: null,
         isAuthenticated: false,
-      };
-    case "GET_CLUB":
-      return {
-        ...state,
-        club: payload,
       };
     default:
       return state;

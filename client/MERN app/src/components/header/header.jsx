@@ -6,6 +6,7 @@ export default function Header() {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
   const clubName = useSelector((state) => state.auth.club?.name);
+  // const club = useSelector((state) => state.auth.club);
 
   const dispatch = useDispatch();
 
@@ -20,7 +21,7 @@ export default function Header() {
   // console.log("authenticated: " + isAuthenticated);
 
   return (
-    <div className="mb-10 bg-gradient-to-bl from-green-400 to-green-100 self-center h-28 w-[calc(100vw+40px)]  flex flex-row align-center justify-between px-24 rounded-b-[500px]">
+    <div className="mb-10 bg-gradient-to-bl shadow-md from-green-400 to-green-100 self-center h-28 w-[calc(100vw+40px)]  flex flex-row align-center justify-between px-24 rounded-b-[500px]">
       <h1 className="self-center text-4xl font-bold text-green-950">
         (E)VENTECH
       </h1>{" "}

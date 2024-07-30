@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getClub } from "../../actions/auth";
+import { getClub } from "../../actions/clubs";
 
 export default function ProfileCard({ clubId }) {
   const dispatch = useDispatch();
@@ -12,7 +12,7 @@ export default function ProfileCard({ clubId }) {
     setLoading(false);
   }, [dispatch, clubId]);
 
-  const club = useSelector((state) => state.auth.club);
+  const club = useSelector((state) => state.clubs);
   console.log(club);
 
   return (
