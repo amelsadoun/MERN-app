@@ -4,7 +4,11 @@ export default (events = [], action) => {
       // console.log(action.payload)
       return action.payload;
     case 'CREATE':
-      return [...events, action.payload];
+      return action.payload;
+    case 'UPDATE':
+      return action.payload;
+    case 'DELETE':
+      return events;
     case 'FETCH':
       // console.log(action.payload)
       return action.payload;

@@ -22,11 +22,11 @@ export default function Events() {
   const events = useSelector((state) => state.events);
 
   if (loading) {
-    return <Loader />;
+    return <Loader text={"Loading events..."}/>;
   }
 
   return (
-    <div className="flex flex-col mx-10 gap-5">
+    <div className="flex flex-col mx-10 gap-5 mb-10">
       {events.map((event, index) => (
         <EventCard key={index} event={event} />
       ))}

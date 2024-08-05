@@ -6,6 +6,8 @@ const events_url = "http://localhost:5000/api/events";
 export const fetchEvents = () => axios.get(events_url);
 export const createEvent = (newEvent) => axios.post(events_url, newEvent);
 export const getEvent = (id) => axios.get(`${events_url}/${id}`);
+export const deleteEvent = (id) => axios.delete(`${events_url}/${id}`);
+export const updateEvent = (id, event) => axios.put(`${events_url}/${id}`, event);
 
 // auth
 // WHY IS IT THAT WHEN I PUT THE CONST IT DOESNT WOOORK
