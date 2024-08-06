@@ -7,6 +7,7 @@ import { Loader } from "../Loader.jsx";
 import * as fields from "./form_fields.jsx";
 import { validateForm } from "./validate.js";
 import { formatDate } from "./formatDate.js";
+import { alternateImage } from "../../assets/alternateImage.js";
 
 const Form = ({ isEditing }) => {
   const dispatch = useDispatch();
@@ -86,6 +87,7 @@ const Form = ({ isEditing }) => {
             ...rest,
             socialLinks: processedSocialLinks,
             clubId: clubId,
+            imageURL: imageURL || alternateImage
           })
         );
       }

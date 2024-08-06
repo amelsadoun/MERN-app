@@ -5,6 +5,8 @@ import Header from "./components/header/header";
 import SignUp from "./components/auth/signup";
 import Login from "./components/auth/login";
 import EventInfo from "./components/posts/eventInfo";
+import EditProfile from "./components/edit profile/editProfile";
+import ChangePassword from "./components/change password/changePassword";
 
 function App() {
  
@@ -19,6 +21,8 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
           <Route path="/:id" element={<EventInfo />} />
+          <Route path="/editProfile" element={<EditProfile />} />
+          <Route path="/changePassword" element={<ChangePassword />} />
         </Routes>
       </div>
     </Router>

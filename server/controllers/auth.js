@@ -76,10 +76,75 @@ export const loginClub = async (req, res) => {
 
     res.status(200).json({
       token,
-      club: { id: club._id, name: club.name, email: club.email },
+      club: { id: club._id, name: club.name, email: club.email, imageURL: club.imageURL, description: club.description},
     });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 };
 
+// @desc middleware for updating club profile
+// @route /updateProfile/:id
+export const updateProfile = async (req, res) => {
+  const { id } = req.params;
+  console.log(id)
+  const { name, email, description, imageURL } = req.body;
+
+  try {
+    const club = await Club.findById(id);
+    if (!club) {
+      return res.status(404).json({ message: "Club not found" });
+    }
+
+    // Update club details
+    club.name = name || club.name;
+    club.email = email || club.email;
+    club.description = description || club.description;
+    club.imageURL = imageURL || club.imageURL;
+
+    await club.save();
+
+    res.status(200).json({
+      message: "Profile updated successfully",
+      club: {
+        id: club._id,
+        name: club.name,
+        email: club.email,
+        description: club.description,
+        imageURL: club.imageURL,
+      },
+    });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+// @desc middleware for changing club password
+// @route /changePassword/:id
+export const changePassword = async (req, res) => {
+  const { id } = req.params;
+  const { oldPassword, newPassword } = req.body;
+
+  try {
+    const club = await Club.findById(id);
+    if (!club) {
+      return res.status(404).json({ message: "Club not found" });
+    }
+
+    // Check if old password is correct
+    const isMatch = await bcrypt.compare(oldPassword, club.password);
+    if (!isMatch) {
+      return res.status(400).json({ message: "The old password is incorrect" });
+    }
+
+    // Hash new password
+    const hashedNewPassword = await bcrypt.hash(newPassword, 10);
+    club.password = hashedNewPassword;
+
+    await club.save();
+
+    res.status(200).json({ message: "Password changed successfully" });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};

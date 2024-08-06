@@ -1,6 +1,6 @@
 const initialState = {
-  club: JSON.parse(localStorage.getItem('club')) || null, // is this dumb?
-  isAuthenticated: !!localStorage.getItem('club'), // Set based on presence of club data, apparently !! booleans everything 
+  club: JSON.parse(localStorage.getItem("club")) || null, // is this dumb?
+  isAuthenticated: !!localStorage.getItem("club"), // Set based on presence of club data, apparently !! booleans everything
 };
 
 export default function (state = initialState, action) {
@@ -9,7 +9,7 @@ export default function (state = initialState, action) {
   switch (type) {
     case "SIGNUP_SUCCESS":
     case "LOGIN_SUCCESS":
-      localStorage.setItem('club', JSON.stringify(payload.club)); // Save club info
+      localStorage.setItem("club", JSON.stringify(payload.club)); // Save club info
       return {
         ...state,
         club: payload.club,
@@ -17,8 +17,26 @@ export default function (state = initialState, action) {
       };
     case "SIGNUP_FAIL":
     case "LOGIN_FAIL":
+    case "UPDATE":
+      localStorage.setItem("club", JSON.stringify(payload.club)); // Save club info
+      return {
+        ...state,
+        club: payload.club,
+      };
+    case "CHANGE_PASSWORD_SUCCESS":
+      return {
+        ...state,
+        // club: payload.club, // Optionally update club info if it was included in the payload
+        isAuthenticated: true,
+      };
+    case "CHANGE_PASSWORD_FAIL":
+      return {
+        ...state,
+        // club: payload.club, // Optionally update club info if it was included in the payload
+        isAuthenticated: true,
+      };
     case "LOGOUT":
-      localStorage.removeItem('club'); // Remove club info
+      localStorage.removeItem("club"); // Remove club info
       return {
         ...state,
         club: null,

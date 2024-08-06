@@ -15,8 +15,9 @@ const auth_url = "http://localhost:5000/api/auth";
 
 //authorization functions
 export const login = (clubData) => axios.post(`${auth_url}/login`, clubData);
-
 export const signup = (clubData) => axios.post(`${auth_url}/signup`, clubData);
+export const updateProfile = (id, club) => axios.put(`${auth_url}/edit/${id}`, club);
+export const changePassword = (id, passwords) => axios.put(`${auth_url}/changePassword/${id}`, passwords);
 
 const clubs_url = "http://localhost:5000/api/clubs";
 
