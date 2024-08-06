@@ -3,10 +3,10 @@ import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { createEvent, getEvent, updateEvent } from "../../actions/events.js";
 import { useNavigate, useParams } from "react-router-dom";
-import { Loader } from "../Loader.jsx";
+import { Loader } from "../utils/Loader.jsx";
 import * as fields from "./form_fields.jsx";
 import { validateForm } from "./validate.js";
-import { formatDate } from "./formatDate.js";
+import { formatDate } from "../utils/formatDate.js";
 import { alternateImage } from "../../assets/alternateImage.js";
 
 const Form = ({ isEditing }) => {

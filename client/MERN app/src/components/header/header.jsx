@@ -25,7 +25,6 @@ export default function Header() {
             <Button buttonText={"+ event"} link="/createEvent" />
             <span className="self-center text-white">{clubName}</span>
             <ProfileMenu />
-        
           </>
         )}
       </div>

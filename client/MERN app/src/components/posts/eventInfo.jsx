@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getEvent } from "../../actions/events";
 import ProfileCard from "./profileCard";
-import { Loader } from "../Loader";
+import { Loader } from "../utils/Loader";
+import { formatDate } from "../utils/formatDate";
 
 export default function EventInfo() {
   const [loading, setLoading] = useState(true);
@@ -23,6 +24,11 @@ export default function EventInfo() {
 
   const event = useSelector((state) => state.events);
 
+  const startDate = formatDate(event.startDate);
+  const endDate = formatDate(event.endDate);
+
+  console.log(startDate);
+  
   if (loading) {
     return <Loader />;
   }
@@ -48,9 +54,9 @@ export default function EventInfo() {
               {tag}
             </>
           ))}
-          <p className="text-lg">Start date: {event.startDate}</p>
+          <p className="text-lg">Start date: {startDate}</p>
           {event.endDate && (
-            <p className="text-lg">End date: {event.endDate}</p>
+            <p className="text-lg">End date: {endDate}</p>
           )}
           <p className="text-lg">Location: {event.location}</p>
           <a

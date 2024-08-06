@@ -35,7 +35,7 @@ export const updateProfile = (id, club) => async (dispatch) => {
   try {
     // console.log(id)
     const { data } = await api.updateProfile(id, club);
-    dispatch({ type: "UPDATE", payload: data });
+    dispatch({ type: "UPDATE_PROFILE", payload: data });
   } catch (err) {
     console.log(err.message);
   }

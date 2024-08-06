@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 // import { changePassword } from "../../actions/auth";
-import { Loader } from "../Loader";
+import { Loader } from "../utils/Loader";
 import { validateChangePassword } from "./validate";
 import { useNavigate } from "react-router-dom";
 import * as fields from "./passwordFields";
