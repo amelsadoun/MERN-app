@@ -34,9 +34,9 @@ export default function EventCard({ event, index }) {
     <>
       <div
         key={index}
-        className=" flex  h-[20vh] flex-row justify-between p-5 w-full bg-white rounded-2xl drop-shadow shadow-lg hover:bg-gradient-to-bl from-green-100 to-slate-100"
+        className=" flex h-[20vh] flex-row justify-between p-5 w-full bg-green-200 bg-opacity-20 rounded-2xl drop-shadow shadow-lg hover:bg-gradient-to-bl from-green-100 to-slate-100"
       >
-        <div className=" flex flex-row gap-5 ">
+        <div className="z-10 flex flex-row gap-5">
           <img
             onClick={handleClick}
             src={event.imageURL}
@@ -52,7 +52,7 @@ export default function EventCard({ event, index }) {
               {event.name}
             </h1>
             <p className="text-lg font-regular">
-              {event.description == ""
+              {event.description === ""
                 ? "No description provided"
                 : event.description}
             </p>

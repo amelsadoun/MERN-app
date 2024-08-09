@@ -20,6 +20,8 @@ const Form = ({ isEditing }) => {
   const params = useParams();
   const id = params.id;
 
+  console.log(fetchedEvent)
+
   const validate = validateForm(isOneDayEvent);
   // console.log(isEditing)
 
@@ -55,28 +57,21 @@ const Form = ({ isEditing }) => {
       endDate: "",
       location: "",
       registrationLink: "",
-      socialLinks: "",
+      socialLinks: [],
       field: "",
       eventType: "",
       imageURL: "",
     },
     validate,
     onSubmit: async (values) => {
-      const { socialLinks, imageURL, ...rest } = values;
+      const { imageURL, ...rest } = values;
       setLoading(true);
 
-      //chatgpt made this because it was saying that socialLinks.split is not a function
-      //so we basically make sure it's a string (IT IS)
-      const processedSocialLinks =
-        typeof socialLinks === "string"
-          ? socialLinks.split(",").map((link) => link.trim())
-          : [];
 
       if (isEditing) {
         await dispatch(
           updateEvent(id, {
             ...rest,
-            socialLinks: processedSocialLinks,
             clubId: clubId,
             imageURL: imageURL || fetchedEvent.imageURL,
           })
@@ -85,7 +80,6 @@ const Form = ({ isEditing }) => {
         await dispatch(
           createEvent({
             ...rest,
-            socialLinks: processedSocialLinks,
             clubId: clubId,
             imageURL: imageURL || alternateImage
           })
@@ -95,6 +89,8 @@ const Form = ({ isEditing }) => {
       navigate("/");
     },
   });
+
+  console.log(formik.values.socialLinks);
 
   useEffect(() => {
     if (!isAuthenticated) {
@@ -108,7 +104,7 @@ const Form = ({ isEditing }) => {
         <Loader/>
       ) : (
         <form
-          className="flex flex-col bg-gradient-to-bl p-14 rounded-2xl mb-10 shadow-lg border-[1px] border-slate-200 from-green-100 to-slate-50 justify-between gap-10 self-center w-[90vw]"
+          className="flex flex-col bg-green-100 bg-opacity-60 p-14 rounded-2xl mb-10 shadow-lg border-[1px] border-slate-200 from-green-100 to-slate-50 justify-between gap-10 self-center w-[90vw]"
           onSubmit={formik.handleSubmit}
         >
           <h1 className="text-3xl text-center mb-3 font-semibold">

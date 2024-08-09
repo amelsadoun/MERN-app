@@ -7,17 +7,18 @@ import Login from "./components/auth/login";
 import EventInfo from "./components/posts/eventInfo";
 import EditProfile from "./components/edit profile/editProfile";
 import ChangePassword from "./components/change password/changePassword";
+import Background from "./components/utils/background";
 
 function App() {
- 
   return (
     <Router>
-      <div className="bg-slate-50 flex flex-col min-h-[100vh]">
+      <div className="-z-20 flex flex-col min-h-[100vh]">
         <Header />
+        <Background />
         <Routes>
           <Route path="/" element={<Posts />} />
-          <Route path="/createEvent" element={<Form isEditing={false}/>} />
-          <Route path="/edit/:id" element={<Form isEditing={true}/>} />
+          <Route path="/createEvent" element={<Form isEditing={false} />} />
+          <Route path="/edit/:id" element={<Form isEditing={true} />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
           <Route path="/:id" element={<EventInfo />} />

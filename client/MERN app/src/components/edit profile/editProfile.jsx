@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getClub } from "../../actions/clubs";
 import { useNavigate } from "react-router-dom";
 import { validate } from "./validate";
-import { Loader } from "../Loader";
+import { Loader } from "../utils/Loader";
 import {
   DescriptionField,
   EmailField,

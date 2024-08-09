@@ -10,3 +10,46 @@
 #root{
   overflow: hidden;
 }
+
+@keyframes float {
+  0% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(10px, -10px);
+  }
+  50% {
+    transform: translate(0, -20px);
+  }
+  75% {
+    transform: translate(-10px, -10px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+.floating-shape {
+  animation: float 6s ease-in-out infinite;
+}
+
+.shape1 {
+  animation-duration: 6s;
+}
+
+.shape2 {
+  animation-duration: 8s;
+}
+
+.shape3 {
+  animation-duration: 10s;
+}
+
+.shape4 {
+  animation-duration: 12s;
+}
+
+.shape5 {
+  animation-duration: 14s;
+}
+

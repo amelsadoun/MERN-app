@@ -3,7 +3,7 @@ import FileBase from "react-file-base64";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { Loader } from "../Loader";
+import { Loader } from "../utils/Loader";
 import { signup } from "../../actions/auth";
 
 export default function SignUp() {

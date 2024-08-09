@@ -1,5 +1,9 @@
 import React from "react";
 import FileBase from "react-file-base64";
+import { useState } from "react";
+import Select from "react-select";
+import { WithContext as ReactTags } from 'react-tag-input';
+import { eventTags } from "../utils/eventTags";
 
 //all the form field are separated here because they made the code too long
 const labelSharedStyle = "ml-2 text-[13px] text-green-700";
@@ -129,18 +133,48 @@ export const RegistrationLink = ({ formik }) => {
   );
 };
 
+
 export const SocialLinks = ({ formik }) => {
+  const [selectedOption, setSelectedOption] = useState(null);
+  const [tags, setTags] = useState(formik.values.socialLinks);
+
+  const options = eventTags;
+
+  const handleSelectChange = (option) => {
+    if (option) {
+      const newTags = [...tags, option.value];
+      setTags(newTags);
+      setSelectedOption(null);
+      formik.setFieldValue('socialLinks', newTags);
+    }
+  };
+
+  const handleDelete = (i) => {
+    const newTags = tags.filter((tag, index) => index !== i);
+    setTags(newTags);
+    formik.setFieldValue('socialLinks', newTags);
+  };
+
   return (
     <div className={divSharedStyle}>
-      <label className={labelSharedStyle}>Social links</label>
-      <input
-        className="h-10 p-2 rounded-md border-[1px] border-slate-300"
-        type="text"
-        name="socialLinks"
-        placeholder="Social Links (comma separated)"
-        value={formik.values.socialLinks}
-        onChange={formik.handleChange}
-        onBlur={formik.handleBlur}
+      <label className={labelSharedStyle}>Tags</label>
+      <Select
+        value={selectedOption}
+        onChange={handleSelectChange}
+        options={options}
+        placeholder="Select event tags"
+      />
+      <ReactTags
+        tags={tags.map(tag => ({ id: tag, text: tag }))}
+        handleDelete={handleDelete}
+        handleAddition={() => {}}
+        allowDragDrop={false}
+        classNames={{
+          tag: 'inline-block w-fit bg-gradient-to-bl from-green-500 to-green-300 shadow-lg rounded-full px-3 py-1 text-sm font-semibold text-white border-[1px] border-slate-200 mr-2 mb-2',
+          tagInput: 'hidden',
+          tagInputField: 'hidden',
+          remove: 'ml-2 cursor-pointer green-700 text-red-500 self-center font-bold'
+        }}
       />
       {formik.errors.socialLinks && formik.touched.socialLinks && (
         <div className="text-red-600 text-left">
@@ -150,6 +184,7 @@ export const SocialLinks = ({ formik }) => {
     </div>
   );
 };
+
 
 export const Field = ({ formik }) => {
   return (

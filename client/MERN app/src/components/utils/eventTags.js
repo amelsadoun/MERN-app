@@ -1,0 +1,22 @@
+export const eventTags = [
+    { value: 'web development', label: 'web development' },
+    { value: 'machine learning', label: 'machine learning' },
+    { value: 'front-end', label: 'front-end' },
+    { value: 'back-end', label: 'back-end' },
+    { value: 'full-stack', label: 'full-stack' },
+    { value: 'data science', label: 'data science' },
+    { value: 'cyber security', label: 'cyber security' },
+    { value: 'cloud computing', label: 'cloud computing' },
+    { value: 'mobile development', label: 'mobile development' },
+    { value: 'game development', label: 'game development' },
+    { value: 'UI/UX design', label: 'UI/UX design' },
+    { value: 'DevOps', label: 'DevOps' },
+    { value: 'database management', label: 'database management' },
+    { value: 'blockchain', label: 'blockchain' },
+    { value: 'internet of things', label: 'internet of things' },
+    { value: 'AR/VR', label: 'AR/VR' },
+    { value: 'artificial intelligence', label: 'artificial intelligence' },
+    { value: 'robotics', label: 'robotics' },
+    { value: 'quantum computing', label: 'quantum computing' },
+    { value: 'networking', label: 'networking' }
+  ];

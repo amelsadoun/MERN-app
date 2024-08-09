@@ -39,7 +39,7 @@ const eventSchema = new mongoose.Schema({
     default: []
   },
   field: {
-    type: [String],
+    type: String,
     required: true,
     enum: ['Hackathon', 'Datathon', 'Workshop', 'Seminar', 'Conference']  // Example event types
   },

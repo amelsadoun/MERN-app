@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Popup } from "react-popupify";
 import { useDispatch } from "react-redux";
-import { Loader } from "../Loader";
+import { Loader } from "../utils/Loader";
 import { deleteEvent } from "../../actions/events";
 
 const DeletePopup = ({ id }) => {
