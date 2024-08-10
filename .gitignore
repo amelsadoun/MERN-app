@@ -4,6 +4,7 @@ server/node_modules/
 
 # Ignore environment files
 server/.env
+client/MERN app/.env
 
 # Ignore system-specific files
 .DS_Store

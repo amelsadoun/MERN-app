@@ -10,7 +10,7 @@ import clubsRouter from "./routes/clubs.js";
 const app = express();
 
 // const port = process.env.PORT || 3000; this doesn't work??
-const port = 5000;
+const port = process.env.PORT || 5000;
 
 // body parser middleware, needs to be before routes else the code gets fucked
 app.use(json({ limit: "30mb", extended: true }));
