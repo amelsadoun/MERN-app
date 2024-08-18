@@ -3,8 +3,43 @@ import Event from "../models/event.js";
 //@route GET /events
 export const getEvents = async (req, res, next) => {
   try {
-    const events = await Event.find();
-    res.status(200).json(events);
+    const { field, type, tags, dateFrom, dateTo, searchQuery, page = 1, limit = 10 } = req.query;
+
+    // Create the filter object based on the query parameters
+    let filters = {};
+
+    if (searchQuery) {
+      filters.name = { $regex: searchQuery, $options: "i" }; // Case-insensitive regex search
+    }
+    if (field) {
+      filters.field = { $in: field }; // Split string to array
+    }
+    if (type) {
+      filters.eventType = { $in: type };
+    }
+    if (tags) {
+      filters.socialLinks = { $in: tags };
+    }
+    if (dateFrom) {
+      filters.startDate = { ...filters.startDate, $gte: new Date(dateFrom) };
+    }
+    if (dateTo) {
+      filters.startDate = { ...filters.startDate, $lte: new Date(dateTo) };
+    }
+
+    // Pagination logic
+    const events = await Event.find(filters)
+      .skip((page - 1) * limit)
+      .limit(Number(limit));
+
+    const totalEvents = await Event.countDocuments(filters);
+
+    res.status(200).json({
+      events,
+      currentPage: page,
+      totalPages: Math.ceil(totalEvents / limit),
+      totalEvents,
+    });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

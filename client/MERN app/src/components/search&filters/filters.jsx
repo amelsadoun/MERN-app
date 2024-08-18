@@ -1,8 +1,7 @@
-// Filters.js
 import { useDispatch } from "react-redux";
 import ToggleButtonGroup from "@mui/joy/ToggleButtonGroup";
 import Button from "@mui/joy/Button";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { eventTags } from "../utils/eventTags";
 import { setFilters } from "../../actions/filters";
 
@@ -18,9 +17,8 @@ export default function Filters() {
   const types = ["Online", "Offline", "Hybrid"];
   const tags = eventTags;
 
-  // console.log(selectedFields)
-
-  useEffect(() => {
+  const handleFiltersSubmit = () => {
+    // Dispatch the filters when the button is clicked
     dispatch(
       setFilters({
         field: selectedFields,
@@ -30,10 +28,10 @@ export default function Filters() {
         dateTo,
       })
     );
-  }, [selectedFields, selectedTypes, selectedTags, dateFrom, dateTo, dispatch]);
+  };
 
   return (
-    <div className="flex flex-wrap align-top justify-around bg-gradient-to-bl from-green-100 to-white py-6 border-[1px] border-slate-200 rounded-3xl shadow-lg">
+    <div className="flex flex-wrap align-top justify-around px-4 bg-gradient-to-bl from-green-100 to-white py-6 border-[1px] border-slate-200 rounded-3xl shadow-lg">
       <ToggleGroup
         title="Field"
         options={fields}
@@ -66,6 +64,12 @@ export default function Filters() {
           onChange={(e) => setDateTo(e.target.value)}
         />
       </div>
+      <button
+        className="mt-4 bg-green-500 text-white py-2 px-4 rounded-md"
+        onClick={handleFiltersSubmit}
+      >
+        Apply Filters
+      </button>
     </div>
   );
 }
@@ -93,10 +97,7 @@ const ToggleGroup = ({ title, options, value, setValue }) => {
         }}
       >
         {options.map((option) => (
-          <Button
-            key={option.value || option}
-            value={option.value || option}
-          >
+          <Button key={option.value || option} value={option.value || option}>
             {option.label || option}
           </Button>
         ))}
@@ -104,4 +105,3 @@ const ToggleGroup = ({ title, options, value, setValue }) => {
     </div>
   );
 };
-

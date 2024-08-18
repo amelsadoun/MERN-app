@@ -12,7 +12,7 @@ export default function EventCard({ event, index }) {
   const [deleteClicked, setDeleteClicked] = useState(false);
   //getting the id of the (logged in) user
   const clubId = useSelector((state) => state.auth.club?.id);
-
+  console.log(event._id);
   //handle when card clicked, it takes to details page
   const handleClick = () => {
     navigate(`/${event._id}`);

@@ -4,75 +4,63 @@ import { useEffect, useState } from "react";
 import { Loader } from "../utils/Loader";
 import { getEvents } from "../../actions/events";
 import SearchBar from "../search&filters/searchBar";
-import { setFilters, setSearchQuery } from "../../actions/filters";
 
 export default function Events() {
   const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
+
   const filters = useSelector((state) => state.filters.filters);
   const searchQuery = useSelector((state) => state.filters.searchQuery);
+  const events = useSelector((state) => state.events.events);
+  const { currentPage, totalPages } = useSelector(
+    (state) => state.events?.pagination || {}
+  );
+
+  // console.log({ currentPage, totalPages })
 
   const dispatch = useDispatch();
+
+  console.log(filters);
 
   useEffect(() => {
     const fetchEvents = async () => {
       setLoading(true);
-      await dispatch(getEvents());
+      await dispatch(getEvents(filters, searchQuery, page));
       setLoading(false);
     };
 
     fetchEvents();
-  }, [dispatch]);
-
-  const events = useSelector((state) => state.events);
-  console.log(events);
-
-  // Filter events based on the selected filters and search query
-  const filteredEvents = events && Array.isArray(events) ? events.filter((event) => {
-    const matchesSearchQuery = event.name
-      .toLowerCase()
-      .includes(searchQuery.toLowerCase());
-
-    const matchesField =
-      filters.field.length === 0 || filters.field.includes(event.field);
-
-    const matchesType =
-      filters.type.length === 0 || filters.type.includes(event.eventType);
-
-    const matchesTags =
-      filters.tags.length === 0 ||
-      filters.tags.some((tag) => event.socialLinks.includes(tag));
-
-    const matchesDateFrom =
-      !filters.dateFrom ||
-      new Date(event.startDate) >= new Date(filters.dateFrom);
-
-    const matchesDateTo =
-      !filters.dateTo || new Date(event.startDate) <= new Date(filters.dateTo);
-
-    // Return true if all conditions match
-    return (
-      matchesSearchQuery &&
-      matchesField &&
-      matchesType &&
-      matchesTags &&
-      matchesDateFrom &&
-      matchesDateTo
-    );
-  }):[];
-
-  if (loading) {
-    return <Loader text={"Loading events..."} />;
-  }
+  }, [dispatch, filters, searchQuery, page]);
 
   return (
-    <div className="flex flex-col mx-40 gap-5 mb-10">
-      <SearchBar
-        setSearchQuery={(query) => dispatch(setSearchQuery(query))}
-        setFilters={(filters) => dispatch(setFilters(filters))}
-      />
-      {filteredEvents.map((event, index) => (
-        <EventCard key={index} event={event} />
-      ))}
+    <div className="flex flex-col mx-32 gap-5 mb-10">
+      <SearchBar />
+      {loading ? (
+        <Loader text={"Loading events..."} />
+      ) : (
+        <>
+          {events.map((event, index) => (
+            <EventCard key={index} event={event} />
+          ))}
+          <div className="flex justify-center mt-5">
+            <button
+              disabled={currentPage == 1}
+              onClick={() => setPage((prev) => prev - 1)}
+              className="px-4 py-2 bg-blue-500 text-white rounded disabled:opacity-50"
+            >
+              Previous
+            </button>
+            <span className="px-4 py-2">{`Page ${currentPage} of ${totalPages}`}</span>
+            <button
+              disabled={currentPage == totalPages}
+              onClick={() => setPage((prev) => prev + 1)}
+              className="px-4 py-2 bg-blue-500 text-white rounded disabled:opacity-50"
+            >
+              Next
+            </button>
+          </div>
+        </>
+      )}
     </div>
   );
 }
