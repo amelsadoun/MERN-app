@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
 import filter_icon from "../../assets/filter.svg";
+import search_icon from "../../assets/search.svg";
 import Filters from "./filters";
 import { setSearchQuery } from "../../actions/filters";
 import { useState } from "react";
@@ -29,10 +30,10 @@ export default function SearchBar() {
           value={searchInput} // Bind input value to state
           onChange={(e) => setSearchInput(e.target.value)} // Update state on change
         />
-        <button className="z-10" onClick={handleSearchSubmit}> {/* Submit button */}
-          Search
+        <button className="z-10 hover:bg-white hover:scale-105 ease-in duration-100 rounded-xl p-2" onClick={handleSearchSubmit}> {/* Submit button */}
+        <img src={search_icon} className="w-7" alt="Filters" />
         </button>
-        <button className="z-10" onClick={toggleFilters}>
+        <button className="z-10 hover:bg-white rounded-xl p-2 hover:scale-105 ease-in duration-100" onClick={toggleFilters}>
           <img src={filter_icon} className="w-7" alt="Filters" />
         </button>
       </div>

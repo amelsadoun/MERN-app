@@ -13,8 +13,8 @@ export default function Header() {
   // console.log("authenticated: " + isAuthenticated);
 
   return (
-    <div className="mb-10 z-10 bg-gradient-to-bl shadow-md from-green-500 to-green-100 self-center h-28 w-[calc(100vw+40px)]  flex flex-row align-center justify-between px-24 rounded-b-[500px]">
-      <h1 className="self-center text-4xl font-bold text-green-950">
+    <div className="mb-10 z-10 bg-gradient-to-bl shadow-md from-green-500 to-green-100 self-center h-28 w-[calc(100vw+40px)]  flex flex-row align-center justify-between desktop:px-24 tablet:px-20 px-10 rounded-b-[500px]">
+      <h1 className="self-center desktop:text-4xl text-2xl font-bold text-green-950">
         (E)VENTECH
       </h1>
       <div className="self-center flex flex-row gap-5">
@@ -36,7 +36,7 @@ function Button({ buttonText, link }) {
   return (
     <Link
       to={link}
-      className="relative items-center self-center justify-start inline-block px-7 py-3 overflow-hidden text-xl rounded-full group"
+      className="relative items-center self-center justify-start inline-block desktop:px-7 px-3 py-3 overflow-hidden desktop:text-xl rounded-full group"
     >
       <span className="translate-x-0 absolute bg-white opacity-[3%]"></span>
       <span className="absolute top-0 rounded-r-full left-0 w-[200px] h-48 -mt-1 transition-all duration-500 ease-in-out -translate-x-48 bg-white opacity-100 group-hover:translate-x-0"></span>

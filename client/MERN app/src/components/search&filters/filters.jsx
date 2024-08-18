@@ -31,7 +31,7 @@ export default function Filters() {
   };
 
   return (
-    <div className="flex flex-wrap align-top justify-around px-4 bg-gradient-to-bl from-green-100 to-white py-6 border-[1px] border-slate-200 rounded-3xl shadow-lg">
+    <div className=" flex flex-wrap align-top justify-around px-4 bg-gradient-to-bl from-green-100 to-white py-6 border-[1px] border-slate-200 rounded-3xl shadow-lg">
       <ToggleGroup
         title="Field"
         options={fields}
@@ -54,18 +54,18 @@ export default function Filters() {
         <h1 className="text-green-800">Date</h1>
         <input
           type="date"
-          className="self-start"
+          className="self-start p-1 rounded-lg border-slate-200 border-[1px]"
           onChange={(e) => setDateFrom(e.target.value)}
         />
         <h1 className="text-black">To</h1>
         <input
           type="date"
-          className="self-start"
+          className="self-start p-1 rounded-lg border-slate-200 border-[1px]"
           onChange={(e) => setDateTo(e.target.value)}
         />
       </div>
       <button
-        className="mt-4 bg-green-500 text-white py-2 px-4 rounded-md"
+        className="mt-4 bg-green-500 hover:scale-105 ease-linear duration-100 text-white py-2 px-4 rounded-md self-center"
         onClick={handleFiltersSubmit}
       >
         Apply Filters
@@ -80,6 +80,8 @@ const ToggleGroup = ({ title, options, value, setValue }) => {
     console.log(newValue);
   };
 
+  const windowWidth = window.innerWidth;
+
   return (
     <div className="flex flex-col gap-5">
       <h1 className="text-green-800">{title}</h1>
@@ -92,7 +94,7 @@ const ToggleGroup = ({ title, options, value, setValue }) => {
           display: title === "Tags" ? "flex" : "",
           flexDirection: title === "Tags" ? "column" : "",
           flexWrap: title === "Tags" ? "wrap" : "nowrap",
-          height: title === "Tags" ? 200 : "",
+          height: title === "Tags" ? (windowWidth > 900 ? 200 : 400) : "",
           width: title === "Tags" ? "fit-content" : "auto",
         }}
       >

@@ -23,7 +23,7 @@ export default function ProfileCard({ clubId }) {
         <>
           <img
             src={club?.imageURL}
-            className="w-[15vw] h-[15vw] rounded-[100%] self-center"
+            className="w-[15vw] h-[15vw] rounded-[100%] self-center object-cover"
             alt="profile"
           />
           <h1 className="text-xl font-semibold">{club?.name}</h1>

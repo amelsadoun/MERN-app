@@ -37,7 +37,7 @@ export default function EventInfo() {
     <div className="mx-10 mb-10 bg-gradient-to-bl from-green-100 overflow-hidden to-slate-50 rounded-3xl shadow-lg">
       <img
         src={event.imageURL}
-        className="w-full desktop:h-96 object-cover"
+        className="w-full desktop:h-96 tablet:h-72 object-cover"
         alt="image"
       />
       <div className="flex flex-row justify-around">

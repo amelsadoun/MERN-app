@@ -33,7 +33,7 @@ export default function Events() {
   }, [dispatch, filters, searchQuery, page]);
 
   return (
-    <div className="flex flex-col mx-32 gap-5 mb-10">
+    <div className="flex flex-col desktop:mx-32 mx-5 gap-5 mb-10">
       <SearchBar />
       {loading ? (
         <Loader text={"Loading events..."} />
@@ -46,17 +46,17 @@ export default function Events() {
             <button
               disabled={currentPage == 1}
               onClick={() => setPage((prev) => prev - 1)}
-              className="px-4 py-2 bg-blue-500 text-white rounded disabled:opacity-50"
+              className="px-4 py-2 text-xl font-semibold bg-slate-100 text-black rounded-lg disabled:opacity-50"
             >
-              Previous
+              {"<"}
             </button>
             <span className="px-4 py-2">{`Page ${currentPage} of ${totalPages}`}</span>
             <button
               disabled={currentPage == totalPages}
               onClick={() => setPage((prev) => prev + 1)}
-              className="px-4 py-2 bg-blue-500 text-white rounded disabled:opacity-50"
+              className="px-4 py-2 text-xl font-semibold bg-slate-100 text-black rounded-lg disabled:opacity-50"
             >
-              Next
+              {">"}
             </button>
           </div>
         </>

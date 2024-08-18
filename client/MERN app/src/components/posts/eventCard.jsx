@@ -34,7 +34,7 @@ export default function EventCard({ event, index }) {
     <>
       <div
         key={index}
-        className=" flex h-[20vh] flex-row justify-between p-5 w-full bg-green-200 bg-opacity-20 rounded-2xl drop-shadow shadow-lg hover:bg-gradient-to-bl from-green-100 to-slate-100"
+        className=" flex h-[20vh] flex-row justify-between p-5 w-full bg-green-200 bg-opacity-20 rounded-2xl drop-shadow shadow-lg hover:bg-gradient-to-bl from-green-100 to-slate-100 border-[1px] border-slate-300"
       >
         <div className="z-10 flex flex-row gap-5">
           <img
