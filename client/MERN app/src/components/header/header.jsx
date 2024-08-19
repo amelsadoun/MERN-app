@@ -13,9 +13,9 @@ export default function Header() {
   // console.log("authenticated: " + isAuthenticated);
 
   return (
-    <div className="mb-10 z-10 bg-gradient-to-bl shadow-md from-green-500 to-green-100 self-center h-28 w-[calc(100vw+40px)]  flex flex-row align-center justify-between desktop:px-24 tablet:px-20 px-10 rounded-b-[500px]">
-      <h1 className="self-center desktop:text-4xl text-2xl font-bold text-green-950">
-        (E)VENTECH
+    <div className="mb-10 z-10 bg-gradient-to-bl shadow-md from-lime-700 to-ocean-900 self-center h-28 w-[calc(100vw+40px)]  flex flex-row align-center justify-between desktop:px-32 tablet:px-20 px-10 rounded-b-[500px]">
+      <h1 className="self-center desktop:text-4xl text-2xl font-extrabold text-ocean-100">
+        (E)venTech
       </h1>
       <div className="self-center flex flex-row gap-5">
         <Button buttonText={"Events"} link="/" />
@@ -40,7 +40,7 @@ function Button({ buttonText, link }) {
     >
       <span className="translate-x-0 absolute bg-white opacity-[3%]"></span>
       <span className="absolute top-0 rounded-r-full left-0 w-[200px] h-48 -mt-1 transition-all duration-500 ease-in-out -translate-x-48 bg-white opacity-100 group-hover:translate-x-0"></span>
-      <span className="relative w-full text-white transition-colors duration-200 ease-in-out group-hover:text-green-900">
+      <span className="relative w-full text-white transition-colors duration-200 ease-in-out group-hover:text-ocean-100">
         {buttonText}
       </span>
       <span className="absolute inset-0 border-[1px] border-white rounded-full"></span>

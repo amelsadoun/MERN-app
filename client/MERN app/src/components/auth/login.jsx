@@ -8,7 +8,7 @@ import { Loader } from "../utils/Loader";
 export default function Login() {
   const inputSharedStyle =
     "h-10 p-3 rounded-xl border-[1px] bg-slate-50 drop-shadow";
-  const labelSharedStyle = "ml-2 text-[13px] text-green-700";
+  const labelSharedStyle = "ml-2 text-[13px] text-ocean-300";
   const divSharedStyle = "flex flex-col gap-2";
 
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -62,7 +62,7 @@ export default function Login() {
   });
 
   return (
-    <div className="bg-gradient-to-bl drop-shadow-xl from-green-100 to-slate-200 mb-10 w-[70vw] self-center p-10 flex border-[1px] border-slate-300 flex-col gap-5 rounded-3xl desktop:w-[30vw] overflow-hidden">
+    <div className="bg-gradient-to-bl drop-shadow-xl from-ocean-900 to-slate-100 mb-10 w-[70vw] self-center p-10 flex border-[1px] border-slate-300 flex-col gap-5 rounded-3xl desktop:w-[30vw] overflow-hidden">
       <Titles />
       {loading && <Loader />}
       <form className="flex flex-col gap-5 z-0" onSubmit={formik.handleSubmit}>
@@ -115,12 +115,12 @@ const Button = ({ label, onClick }) => {
       onClick={onClick}
       className="relative items-center self-center justify-start inline-block px-5 py-2 overflow-hidden text-lg rounded-full group my-3"
     >
-      <span className="translate-x-0 absolute bg-green-700 opacity-[3%]"></span>
-      <span className="absolute top-0 rounded-r-full left-0 w-[200px] h-60 -mt-1 transition-all duration-500 ease-in-out -translate-x-80 bg-green-900 opacity-100 group-hover:translate-x-0"></span>
-      <span className="relative w-full text-green-900 transition-colors duration-200 ease-in-out group-hover:text-white">
+      <span className="translate-x-0 absolute bg-ocean-200 opacity-[3%]"></span>
+      <span className="absolute top-0 rounded-r-full left-0 w-[200px] h-60 -mt-1 transition-all duration-500 ease-in-out -translate-x-80 bg-ocean-200 opacity-100 group-hover:translate-x-0"></span>
+      <span className="relative w-full text-ocean-200 transition-colors duration-200 ease-in-out group-hover:text-white">
         {label}
       </span>
-      <span className="absolute inset-0 border-[1px] border-green-900 rounded-full"></span>
+      <span className="absolute inset-0 border-[1px] border-ocean-200 rounded-full"></span>
     </a>
   );
 };
@@ -128,10 +128,10 @@ const Button = ({ label, onClick }) => {
 const Titles = () => {
   return (
     <>
-      <p className="text-green-900 self-center text-center font-bold text-2xl desktop:text-3xl ">
+      <p className="text-ocean-400 self-center text-center font-bold text-2xl desktop:text-3xl ">
         Login to your (E)venTech account
       </p>
-      <p className="text-green-900 text-left self-center font-medium text-lg mb-3">
+      <p className="text-ocean-200 text-left self-center font-medium text-lg mb-3">
         Got a new event to promote? Login and inform the community!
       </p>
     </>
@@ -142,7 +142,7 @@ const SignupLink = () => {
   return (
     <p className="self-center text-sm">
       Don't have an account yet?{" "}
-      <Link to="/signup" className="text-green-700 underline">
+      <Link to="/signup" className="text-lime-300 underline">
         Create an account
       </Link>
     </p>

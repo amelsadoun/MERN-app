@@ -31,7 +31,7 @@ export default function Filters() {
   };
 
   return (
-    <div className=" flex flex-wrap align-top justify-around px-4 bg-gradient-to-bl from-green-100 to-white py-6 border-[1px] border-slate-200 rounded-3xl shadow-lg">
+    <div className=" flex flex-wrap align-top justify-around px-4 bg-gradient-to-bl from-lime-800 to-white py-6 border-[1px] border-slate-200 rounded-3xl shadow-lg">
       <ToggleGroup
         title="Field"
         options={fields}
@@ -51,7 +51,7 @@ export default function Filters() {
         setValue={setSelectedTags}
       />
       <div className="flex flex-col gap-5">
-        <h1 className="text-green-800">Date</h1>
+        <h1 className="text-ocean-200">Date</h1>
         <input
           type="date"
           className="self-start p-1 rounded-lg border-slate-200 border-[1px]"
@@ -65,7 +65,7 @@ export default function Filters() {
         />
       </div>
       <button
-        className="mt-4 bg-green-500 hover:scale-105 ease-linear duration-100 text-white py-2 px-4 rounded-md self-center"
+        className="mt-4 bg-ocean-500 hover:scale-105 ease-linear duration-100 text-white py-2 px-4 rounded-md self-center"
         onClick={handleFiltersSubmit}
       >
         Apply Filters
@@ -84,7 +84,7 @@ const ToggleGroup = ({ title, options, value, setValue }) => {
 
   return (
     <div className="flex flex-col gap-5">
-      <h1 className="text-green-800">{title}</h1>
+      <h1 className="text-ocean-200">{title}</h1>
       <ToggleButtonGroup
         orientation="vertical"
         size="md"

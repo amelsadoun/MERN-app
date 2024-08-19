@@ -16,8 +16,6 @@ export default function Events() {
     (state) => state.events?.pagination || {}
   );
 
-  // console.log({ currentPage, totalPages })
-
   const dispatch = useDispatch();
 
   console.log(filters);
@@ -37,6 +35,8 @@ export default function Events() {
       <SearchBar />
       {loading ? (
         <Loader text={"Loading events..."} />
+      ) : events.length === 0 ? (
+        <div className="text-center my-20 text-xl font-medium">Oops, no events for now {" :("}</div>
       ) : (
         <>
           {events.map((event, index) => (
@@ -44,7 +44,7 @@ export default function Events() {
           ))}
           <div className="flex justify-center mt-5">
             <button
-              disabled={currentPage == 1}
+              disabled={currentPage === 1}
               onClick={() => setPage((prev) => prev - 1)}
               className="px-4 py-2 text-xl font-semibold bg-slate-100 text-black rounded-lg disabled:opacity-50"
             >
@@ -52,7 +52,7 @@ export default function Events() {
             </button>
             <span className="px-4 py-2">{`Page ${currentPage} of ${totalPages}`}</span>
             <button
-              disabled={currentPage == totalPages}
+              disabled={currentPage === totalPages}
               onClick={() => setPage((prev) => prev + 1)}
               className="px-4 py-2 text-xl font-semibold bg-slate-100 text-black rounded-lg disabled:opacity-50"
             >
