@@ -31,7 +31,7 @@ export default function Filters() {
   };
 
   return (
-    <div className=" flex flex-wrap align-top justify-around px-4 bg-gradient-to-bl from-lime-800 to-white py-6 border-[1px] border-slate-200 rounded-3xl shadow-lg">
+    <div className=" flex flex-wrap align-top justify-around p-7 bg-white bg-opacity-70 from-lime-800 to-white border-[1px] border-slate-200 rounded-3xl shadow-lg">
       <ToggleGroup
         title="Field"
         options={fields}
@@ -65,7 +65,7 @@ export default function Filters() {
         />
       </div>
       <button
-        className="mt-4 bg-ocean-500 hover:scale-105 ease-linear duration-100 text-white py-2 px-4 rounded-md self-center"
+        className="mt-4 bg-lime-500 hover:scale-105 ease-linear duration-100 text-white py-2 px-4 rounded-md self-center"
         onClick={handleFiltersSubmit}
       >
         Apply Filters

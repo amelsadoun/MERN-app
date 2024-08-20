@@ -8,7 +8,7 @@ export default function Hero() {
     navigate("/events");
   };
   return (
-    <div className="flex flex-row justify-around align-start items-center flex-wrap tablet:flex-nowrap gap-16 bg-gradient-to-b from-lime-900 to-ocean-800 desktop:px-32 px-10 py-10 pb-64">
+    <div className="flex flex-row justify-around align-start items-center flex-wrap tablet:flex-nowrap gap-16 bg-gradient-to-b from-lime-900 to-ocean-800 desktop:px-32 px-10 py-10 desktop:pb-72">
       <div className="flex flex-col gap-10 items-start">
         <h1 className="text-4xl font-bold text-ocean-300">
           Discover the Best Student Events Around You!
@@ -20,7 +20,7 @@ export default function Hero() {
           upvote your favorites, and never miss out on the experiences that
           matter to you!
         </p>
-        <Button label="Start browsing" onClick={browseToHome} />
+        <Button label="Start browsing →" onClick={browseToHome} />
       </div>
       <img src={hero_image} className="w-[40vw] drop-shadow-xl" alt="" />
     </div>

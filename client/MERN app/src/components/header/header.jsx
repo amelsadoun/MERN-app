@@ -13,12 +13,12 @@ export default function Header() {
   // console.log("authenticated: " + isAuthenticated);
 
   return (
-    <div className="mb-10 z-10 bg-gradient-to-bl shadow-md from-lime-700 to-ocean-900 self-center h-28 w-[calc(100vw+40px)]  flex flex-row align-center justify-between desktop:px-32 tablet:px-20 px-10 rounded-b-[500px]">
-      <h1 className="self-center desktop:text-4xl text-2xl font-extrabold text-ocean-100">
+    <div className="mb-10 z-10 bg-gradient-to-bl shadow-md from-ocean-600 to-ocean-900 self-center h-28 w-[calc(100vw+40px)]  flex flex-row align-center justify-between desktop:px-32 tablet:px-20 px-10 rounded-b-[500px]">
+      <Link to="/" className="self-center desktop:text-4xl text-2xl font-extrabold text-ocean-100">
         (E)venTech
-      </h1>
+      </Link>
       <div className="self-center flex flex-row gap-5">
-        <Button buttonText={"Events"} link="/" />
+        <Button buttonText={"Events"} link="/events" />
         {!isAuthenticated && <Button buttonText={"Log in"} link="/login" />}
         {isAuthenticated && (
           <>

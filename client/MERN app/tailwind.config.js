@@ -4,18 +4,18 @@ export default {
   theme: {
     extend: {
       colors: {
-        lime: {
-          DEFAULT: '#d8e0a4',
-          100: '#353a14',
-          200: '#697428',
-          300: '#9ead3b',
-          400: '#bfcc6a',
-          500: '#d8e0a4',
-          600: '#e0e6b6',
-          700: '#e7ecc8',
-          800: '#eff3db',
-          900: '#f7f9ed'
-        },
+        // lime: {
+        //   DEFAULT: '#d8e0a4',
+        //   100: '#353a14',
+        //   200: '#697428',
+        //   300: '#9ead3b',
+        //   400: '#bfcc6a',
+        //   500: '#d8e0a4',
+        //   600: '#e0e6b6',
+        //   700: '#e7ecc8',
+        //   800: '#eff3db',
+        //   900: '#f7f9ed'
+        // },
         ocean: {
           DEFAULT: '#1a485f',
           100: '#050f13',
@@ -28,7 +28,7 @@ export default {
           800: '#85c0de',
           900: '#c2e0ee'
         },
-        bittersweet: {
+        lime: {
           DEFAULT: '#ff6060',
           100: '#460000',
           200: '#8d0000',

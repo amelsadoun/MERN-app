@@ -1,6 +1,7 @@
 import Features from "./features";
 import Hero from "./hero";
 import LeandingHeader from "./landingHeader";
+import Mobile from "./mobile";
 
 export default function Landing() {
   return (
@@ -8,6 +9,7 @@ export default function Landing() {
       <LeandingHeader />
       <Hero />
       <Features />
+      <Mobile />
     </div>
   );
 }

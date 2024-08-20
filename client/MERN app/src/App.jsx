@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Route, Routes, useLocation } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  useLocation,
+} from "react-router-dom";
 import Posts from "./components/posts/events";
 import Form from "./components/event forms/form";
 import Header from "./components/header/header";
@@ -15,8 +20,13 @@ function App() {
 
   return (
     <div className="-z-20 flex flex-col min-h-[100vh]">
-      {location.pathname !== "/" && <Header />}
-      <Background />
+      {location.pathname !== "/" && (
+        <>
+          <Header />
+          <Background />
+        </>
+      )}
+
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/events" element={<Posts />} />

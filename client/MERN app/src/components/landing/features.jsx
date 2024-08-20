@@ -26,11 +26,11 @@ export default function Features() {
   ];
 
   return (
-    <div className="flex rounded-3xl p-5 shadow-2xl shadow-ocean-400 flex-wrap bg-lime-900 desktop:flex-nowrap flex-row justify-between self-center desktop:-mt-52">
+    <div className="flex rounded-3xl p-5 shadow-2xl shadow-slate-400 border-t-[1px] border-slate-200 flex-wrap backdrop-blur-2xl desktop:flex-nowrap desktop:flex-row flex-col justify-between self-center desktop:-mt-52 mt-10">
       {features.map((feature, index) => (
         <>
           {" "}
-          {index !== 0 && <div className="h-80 bg-ocean-500 w-1 mx-3 rounded-full self-center"/>}
+          {index !== 0 && <div className="hidden desktop:block h-80 bg-[#E6E6E6] opacity-100 w-1 mx-3 rounded-full self-center"/>}
           <FeatureCard
             label={feature.label}
             description={feature.description}
