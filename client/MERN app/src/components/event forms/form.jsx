@@ -86,7 +86,7 @@ const Form = ({ isEditing }) => {
         );
       }
       setLoading(false);
-      navigate("/");
+      navigate("/events");
     },
   });
 

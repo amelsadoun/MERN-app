@@ -34,7 +34,7 @@ const EditProfile = () => {
       setLoading(true);
       await dispatch(updateProfile(club.id, values));
       setLoading(false);
-      navigate("/");
+      navigate("/events");
     },
   });
 
